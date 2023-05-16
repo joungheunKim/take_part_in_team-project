@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 유형02</title>
+    <style>
+        @import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
+
+        .gmark {
+            font-family: 'GmarketSans';
+            font-weight: 500;
+        }
+
+        /* reset */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: normal;
+        }
+
+        /* common */
+        .container {
+            width: 1160px;
+            padding: 0 20px;
+            margin: 0 auto;
+            min-width: 1160px;
+        }
+
+        .section {
+            padding: 120px 0;
+        }
+
+        .section>h2 {
+            font-size: 50px;
+            line-height: 1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section>p {
+            font-size: 22px;
+            font-weight: 300;
+            color: #666;
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .gray {
+            background-color: #f5f5f5;
+        }
+
+        /* ir 효과(이미지 대체 효과 == alt) */
+        .ir {
+            display: block;
+            overflow: hidden;
+            font-size: 0;
+            line-height: 0;
+            text-indent: -9999px;
+        }
+
+        .mypost {
+
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 20px auto;
+            text-align: right;
+
+        }
+
+
+        .mypost>button {
+
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* cardType02 */
+        .card__inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card__inner .card {
+            width: 24%;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+
+        .card__inner .card img {
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .card__inner .card .tit {
+            font-size: 28px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding-right: 20px;
+        }
+
+        .card__inner .card .desc {
+            font-size: 18px;
+            font-weight: 300;
+            color: #666;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .card__inner .card .more {
+            width: 24px;
+            height: 24px;
+            background-image: url(arrow.svg);
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            border-radius: 3px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            show_comment();
+        });
+
+        function save_comment() {
+            let name = $('#Mname').val()
+            let formData = new FormData();
+            formData.append("name_give", name);
+            fetch('/teams', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
+                alert(data["msg"]);
+            });
+        }
+
+        function show_comment() {
+            fetch('/teams').then((res) => res.json()).then((data) => {
+                let rows = data['result']
+                $('#member-list').empty()
+                rows.forEach((a) => {
+                    let name = a['name']
+                    let temp_html = `
+                                        <div class="card">
+                                            <img src="" alt="사진">
+                                            <h3 class="tit" id="MemberName">${name}</h3>
+                                            <p class="desc">
+                                                잘부탁드려요
+                                            </p>
+                                            <a href="card.html" class="more"><span class="ir">더보기</span></a>
+                                        </div>`
+                    $('#member-list').append(temp_html)
+                })
+
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <section id="cardType02" class="card__wrap gmark section">
+        <h2>제목</h2>
+        <p>
+            소제목 소개<br>
+
+        </p>
+        <div class="mypost">
+            
+
+            <a href="member.html">
+                <button type="button" class="btn btn-dark">
+                    팀원 입력하기
+                </button></a>
+        </div>
+
+        <div class="card__inner container gray" id="member-list">
+            <div class="card">
+                <img src="hi.jpg" alt="사진">
+                <h3 class="tit" id="MemberName">(이름)</h3>
+                <p class="desc">
+                    잘부탁드려요
+                </p>
+                <a href="card.html" class="more"><span class="ir">더보기</span></a>
+            </div>
+            <div class="card">
+                <img src="" alt="사진">
+                <h3 class="tit" id="MemberName">(이름)</h3>
+                <p class="desc">
+                    잘부탁드려요
+                </p>
+                <a href="#" class="more"><span class="ir">더보기</span></a>
+            </div>
+            <div class="card">
+                <img src="" alt="사진">
+                <h3 class="tit" id="MemberName">(이름)</h3>
+                <p class="desc">
+                    잘부탁드려요
+                </p>
+                <a href="#" class="more"><span class="ir">더보기</span></a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
