@@ -13,7 +13,7 @@ def home():
 def gojoin():
     return render_template('join.html')
 
-@app.route('/gocard/<membername>')
+@app.route('/gocard/<memberName>')
 def gocard(memberName):
     only_member = list(db.teams.find({'name':memberName},{'_id':False}))
     
