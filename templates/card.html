@@ -70,10 +70,9 @@
         }
     </script>
 </head>
-
 <body>
     <div class="title">
-        <h1>소주와삼겹살 팀원 소개</h1>
+        <h1>{{only[0].name}} 팀원 소개</h1>
     </div>
     <div class="cards">
         <div class="card mb-3" style="width: 1000px;">
@@ -85,13 +84,13 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body" style="padding-top: 100px; padding-bottom: 50px;">
-                        <h5 class="card-title">이름이 들어갑니다.</h5>
-                        <p class="card-text">나이 : 나이가 들어갑니다.</p>
-                        <p class="card-text">취미 : 취미가 들어갑니다.</p>
-                        <p class="card-text">블로그 : 블로그 주소가 들어갑니다.</p>
-                        <p class="card-text">부트캠프 다짐 : 부트캠프 다짐이 들어갑니다.</p>
+                        <h5 class="card-title">{{only[0].name}}</h5>
+                        <p class="card-text">나이 : {{only[0].age}}</p>
+                        <p class="card-text">취미 : {{only[0].hobby}}</p>
+                        <p class="card-text">블로그 : {{only[0].blog}}</p>
+                        <p class="card-text">부트캠프 다짐 : {{only[0].comment}}</p>
                         <div class="btn">
-                            <button onclick="move_team()" type="button" class="btn btn-dark">팀 소개 페이지로 이동</button>
+                            <button onclick="location.href='/'" type="button" class="btn btn-dark">팀 소개 페이지로 이동</button>
                         </div>
                     </div>
                 </div>
