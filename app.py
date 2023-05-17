@@ -5,6 +5,7 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://sparta:test@joungheun.fsxjost.mongodb.net/?retryWrites=true&w=majority')
 db =client.dbsparta
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -14,10 +15,10 @@ def gojoin():
     return render_template('join.html')
 
 @app.route('/gocard/<memberName>')
-def gocard(memberName):
-    only_member = list(db.teams.find({'name':memberName},{'_id':False}))
+def gocard(memberNamed):
+    only_memberd = list(db.teams.find({'name':memberNamed},{'_id':False}))
     
-    return render_template('card.html',only = only_member)
+    return render_template('card.html',only = only_memberd)
 
 
 @app.route("/teams", methods=["POST"])
