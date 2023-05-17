@@ -9,6 +9,17 @@ db =client.dbsparta
 def home():
     return render_template('index.html')
 
+@app.route('/gojoin')
+def gojoin():
+    return render_template('join.html')
+
+@app.route('/gocard/<memberName>')
+def gocard(memberName):
+    only_member = list(db.teams.find({'name':memberName},{'_id':False}))
+    
+    return render_template('card.html',only = only_member)
+
+
 @app.route("/teams", methods=["POST"])
 def teams_post():
     name_receive = request.form['name_give']
@@ -17,13 +28,13 @@ def teams_post():
     blog_receive = request.form['blog_give']
     comment_receive = request.form['comment_give']
     image_receive = request.form['image_give']
-
+    
     doc = {
         'name':name_receive,
         'age':age_receive,
         'hobby':hobby_receive,
         'blog':blog_receive,
-        'comment':comment_receive,
+        'comment':comment_receive, 
         'image':image_receive
     }
     db.teams.insert_one(doc)
@@ -35,9 +46,7 @@ def teams_get():
     all_teams = list(db.teams.find({},{'_id':False}))
     return jsonify({'result': all_teams})
 
-@app.route('/card')
-def card():
-   return render_template('card.html')
+
 
 
 if __name__ == '__main__':
