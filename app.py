@@ -5,7 +5,6 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://sparta:test@joungheun.fsxjost.mongodb.net/?retryWrites=true&w=majority')
 db =client.dbsparta
 
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -14,13 +13,14 @@ def home():
 def gojoin():
     return render_template('join.html')
 
-
 @app.route('/gocard/<memberNamed>')
-
 def gocard(memberNamed):
     only_memberd = list(db.teams.find({'name':memberNamed},{'_id':False}))
     
     return render_template('card.html',only = only_memberd)
+
+
+
 
 
 @app.route("/teams", methods=["POST"])
@@ -44,9 +44,27 @@ def teams_post():
 
     return jsonify({'msg':'저장 완료!'})
 
+@app.route('/goupdate/<memberName>')
+def goupdate(memberName):
+    only_member = list(db.teams.find({'name':memberName},{'_id':False}))
+    
+    return render_template('update.html',onlyone = only_member)
+
+@app.route("/teamsUpdate/<updateName>", methods=["PUT"])
+def teams_update(updateName):
+    name_receive = request.form['name_give']
+    age_receive = request.form['age_give']
+    hobby_receive = request.form['hobby_give']
+    blog_receive = request.form['blog_give']
+    comment_receive = request.form['comment_give']
+    image_receive = request.form['image_give']
+    db.teams.update_one({'name':updateName}, {"$set":{'name':name_receive, 'age':age_receive, 'hobby':hobby_receive, 'blog':blog_receive
+                                                        ,'comment':comment_receive,'image':image_receive}});
+    return jsonify({'msg':'수정 완료!'})
+
 @app.route("/teams/<name>", methods=["DELETE"])
 def teams_delete(name):
-    
+
     db.teams.delete_one({'name':name})
 
     return jsonify({'msg':'삭제 완료!'})
@@ -55,8 +73,6 @@ def teams_delete(name):
 def teams_get():
     all_teams = list(db.teams.find({},{'_id':False}))
     return jsonify({'result': all_teams})
-
-
 
 
 if __name__ == '__main__':
