@@ -184,12 +184,16 @@
                 $('#member-list').empty()
                 rows.forEach((a) => {
                     let name = a['name']
+                    let image = a['image']
+                    let comment = a['comment']
                     let temp_html = `
                                         <div class="card">
-                                            <img src="" alt="사진">
+
+                                            <img src="${image}" alt="사진">
+
                                             <h3 class="tit" id = "member-name">${name}</h3>
                                             <p class="desc">
-                                                잘부탁드려요
+                                                ${comment}
                                             </p>
                                             <button type="button" class="more" 
                                             onclick="location.href='/gocard/${name}'"><span class="ir">더보기</span></button>
@@ -207,7 +211,7 @@
         <h2>삼겹살과 소주</h2>
 
         <p>
-            소제목 소개<br>
+            삼겹살에 소주 한 잔 마시듯 팀원들과 어려워도 즐겁게 함께하는 팀이<br>
 
         </p>
         <div class="mypost">
@@ -230,4 +234,6 @@
             </div>
         </div>
     </section>
+
 </body>
+

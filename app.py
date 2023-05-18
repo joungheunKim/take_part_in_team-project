@@ -14,7 +14,9 @@ def home():
 def gojoin():
     return render_template('join.html')
 
-@app.route('/gocard/<memberName>')
+
+@app.route('/gocard/<memberNamed>')
+
 def gocard(memberNamed):
     only_memberd = list(db.teams.find({'name':memberNamed},{'_id':False}))
     
