@@ -92,7 +92,7 @@
             font-weight: 300;
             color: #666;
             text-align: center;
-            margin-bottom: 70px;
+            margin-bottom: 20px;
         }
 
         .blue {
@@ -192,9 +192,10 @@
                 $('#member-list').empty()
                 rows.forEach((a) => {
                     let name = a['name']
+                    let image = a['image']
                     let temp_html = `
                                         <div class="card">
-                                            <img src="" alt="사진">
+                                            <img src="${image}" alt="사진">
                                             <h3 class="tit" id = "member-name">${name}</h3>
                                             <p class="desc">
                                                 잘부탁드려요
