@@ -19,10 +19,6 @@ def gocard(memberNamed):
     
     return render_template('card.html',only = only_memberd)
 
-
-
-
-
 @app.route("/teams", methods=["POST"])
 def teams_post():
     name_receive = request.form['name_give']
@@ -50,7 +46,7 @@ def goupdate(memberName):
     
     return render_template('update.html',onlyone = only_member)
 
-@app.route("/teamsUpdate/<updateName>", methods=["PUT"])
+@app.route("/teamsUpdate/<updateName>", methods=["UPDATE"])
 def teams_update(updateName):
     name_receive = request.form['name_give']
     age_receive = request.form['age_give']

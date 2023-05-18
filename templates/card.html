@@ -97,8 +97,8 @@
                         <h5 class="card-title">{{only[0].name}}</h5>
                         <p class="card-text">나이 : {{only[0].age}}</p>
                         <p class="card-text">취미 : {{only[0].hobby}}</p>
-                        <p class="card-text">블로그 : {{only[0].blog}}</p>
-                        <p class="card-text">부트캠프 다짐 : {{only[0].comment}}</p>
+                        <p class="card-text" >블로그 : <a href="{{only[0].blog}}">{{only[0].blog}}</a></p>
+                        <p class="card-text" style="margin-top: 10px;">부트캠프 다짐 : {{only[0].comment}}</p>
                         <div class="btn">
                             <button onclick="location.href='/'" type="button" class="btn btn-dark">팀 소개 페이지로 이동</button>
                         </div>
