@@ -87,7 +87,7 @@
             formData.append("comment_give", comment);
             formData.append("image_give", image);
 
-            fetch('/teamsUpdate/{{onlyone[0].name}}', { method: "PUT", body: formData }).then((res) => res.json()).then((data) => {
+            fetch('/teamsUpdate/{{onlyone[0].name}}', { method: "UPDATE", body: formData }).then((res) => res.json()).then((data) => {
                 alert(data['msg'])
                 window.location.href = '/'
             })
