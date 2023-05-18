@@ -44,6 +44,13 @@ def teams_post():
 
     return jsonify({'msg':'저장 완료!'})
 
+@app.route("/teams/<name>", methods=["DELETE"])
+def teams_delete(name):
+    
+    db.teams.delete_one({'name':name})
+
+    return jsonify({'msg':'삭제 완료!'})
+
 @app.route("/teams", methods=["GET"])
 def teams_get():
     all_teams = list(db.teams.find({},{'_id':False}))
