@@ -14,7 +14,7 @@ def home():
 def gojoin():
     return render_template('join.html')
 
-@app.route('/gocard/<memberName>')
+@app.route('/gocard/<memberNamed>')
 def gocard(memberNamed):
     only_memberd = list(db.teams.find({'name':memberNamed},{'_id':False}))
     
@@ -41,6 +41,13 @@ def teams_post():
     db.teams.insert_one(doc)
 
     return jsonify({'msg':'저장 완료!'})
+
+@app.route("/teams/<name>", methods=["DELETE"])
+def teams_delete(name):
+    
+    db.teams.delete_one({'name':name})
+
+    return jsonify({'msg':'삭제 완료!'})
 
 @app.route("/teams", methods=["GET"])
 def teams_get():
