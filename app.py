@@ -5,9 +5,21 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://sparta:test@joungheun.fsxjost.mongodb.net/?retryWrites=true&w=majority')
 db =client.dbsparta
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/gojoin')
+def gojoin():
+    return render_template('join.html')
+
+@app.route('/gocard/<memberNamed>')
+def gocard(memberNamed):
+    only_memberd = list(db.teams.find({'name':memberNamed},{'_id':False}))
+    
+    return render_template('card.html',only = only_memberd)
+
 
 @app.route("/teams", methods=["POST"])
 def teams_post():
@@ -17,13 +29,13 @@ def teams_post():
     blog_receive = request.form['blog_give']
     comment_receive = request.form['comment_give']
     image_receive = request.form['image_give']
-
+    
     doc = {
         'name':name_receive,
         'age':age_receive,
         'hobby':hobby_receive,
         'blog':blog_receive,
-        'comment':comment_receive,
+        'comment':comment_receive, 
         'image':image_receive
     }
     db.teams.insert_one(doc)
@@ -35,9 +47,7 @@ def teams_get():
     all_teams = list(db.teams.find({},{'_id':False}))
     return jsonify({'result': all_teams})
 
-@app.route('/card')
-def card():
-   return render_template('card.html')
+
 
 
 if __name__ == '__main__':
