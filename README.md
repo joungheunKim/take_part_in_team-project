@@ -46,13 +46,13 @@ gocard 라는 값이 들어왔을때 card.html을 리턴해주는 방법으로 �
 <button type="button" onclick="location.href='/gocard/${name}'"><span class="ir">더보기</span></button>
  ```
 메인페이지에 노출되는 작은 미니카드에서 개인카드로 넘어가는 버튼에서 가져온 이름${name}을 사용하였다.
-```
+
 @app.route('/gocard/<memberNamed>')
 def gocard(memberNamed):
   only_memberd = list(db.teams.find({'name':memberNamed},{'_id':False}))
     
   return render_template('card.html',only = only_memberd)
-```
+
 <memberNamed>라는 값으로 받아 Mongodb에서 name 값이 같은 정보만 불러와서
   card.html에 only라는 값으로 정보를 주기로 하였다.
   
@@ -144,11 +144,12 @@ def gocard(memberNamed):
         }
 
     </script>
-        ```
+
         
         fetch('/teamsUpdate/{{onlyone[0].name}}에서 {{onlyone[0].name}}값을 updateName으로 받아
-        
 ```
+
+        
 @app.route("/teamsUpdate/<updateName>", methods=["UPDATE"])
     def teams_update(updateName):
     name_receive = request.form['name_give']
@@ -160,7 +161,9 @@ def gocard(memberNamed):
     db.teams.update_one({'name':updateName}, {"$set":{'name':name_receive, 'age':age_receive, 'hobby':hobby_receive, 'blog':blog_receive
                                                         ,'comment':comment_receive,'image':image_receive}});
     return jsonify({'msg':'수정 완료!'})
-```
-        set 함수로 묶은뒤 {'name':updateName} db에서 name이 updateName와 같은 정보를 현제 보내주는 정보로 업데이트 하게끔 하였다.
-        이 역시 위에 구현한 방법들과 같은 이유로 'name' 이름값이 동일한 정보가 있을 경우 같은 이름값의 정보도 수정될 수 있다는 문제점이 있다.
+
+set 함수로 묶은뒤 {'name':updateName} db에서 name이 updateName와 같은 정보를
+현제 보내주는 정보로 업데이트 하게끔 하였다.        
+이 역시 위에 구현한 방법들과 같은 이유로 'name' 이름값이 동일한 정보가 있을 경우
+같은 이름값의 정보도 수정될 수 있다는 문제점이 있다.
         
