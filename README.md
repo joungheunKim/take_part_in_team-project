@@ -1,4 +1,5 @@
 # 팀소개 웹페이지 만들기
+![api 명세](https://github.com/joungheunKim/take_part_in_team-project/assets/132051740/c2352311-e306-40cc-8937-9e32a5557966)
 
 참여 : 김종현(팀장), 이수현, 김주승
 ## 프로젝트 목표
