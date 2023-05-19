@@ -158,8 +158,9 @@ def gocard(memberNamed):
     blog_receive = request.form['blog_give']
     comment_receive = request.form['comment_give']
     image_receive = request.form['image_give']
-    db.teams.update_one({'name':updateName}, {"$set":{'name':name_receive, 'age':age_receive, 'hobby':hobby_receive, 'blog':blog_receive
-                                                        ,'comment':comment_receive,'image':image_receive}});
+    db.teams.update_one({'name':updateName}, 
+        {"$set":{'name':name_receive, 'age':age_receive, 'hobby':hobby_receive,
+        'blog':blog_receive,'comment':comment_receive,'image':image_receive}});
     return jsonify({'msg':'수정 완료!'})
 
 set 함수로 묶은뒤 {'name':updateName} db에서 name이 updateName와 같은 정보를
