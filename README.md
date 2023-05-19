@@ -162,10 +162,16 @@ def gocard(memberNamed):
         {"$set":{'name':name_receive, 'age':age_receive, 'hobby':hobby_receive,
         'blog':blog_receive,'comment':comment_receive,'image':image_receive}});
     return jsonify({'msg':'수정 완료!'})
-
+```
 set 함수로 묶은뒤 {'name':updateName} db에서 name이 updateName와 같은 정보를
 현제 보내주는 정보로 업데이트 하게끔 하였다.        
 이 역시 위에 구현한 방법들과 같은 이유로 'name' 이름값이 동일한 정보가 있을 경우
 같은 이름값의 정보도 수정될 수 있다는 문제점이 있다.
 
-  
+        
+## 구현 내용
+        이미지 업로드 및 이미지 다운로드
+        
+### 시행착오들
+        input type="file"로 파일을 선택할 수 있는 기능을 추가하여 그 정보를 그대로 db에 저장하면 되는 것인줄 알았다.
+        
